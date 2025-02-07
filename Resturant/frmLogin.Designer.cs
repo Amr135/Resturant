@@ -64,6 +64,7 @@
             guna2Panel1.ShadowDecoration.CustomizableEdges = customizableEdges3;
             guna2Panel1.Size = new Size(419, 203);
             guna2Panel1.TabIndex = 0;
+            guna2Panel1.Paint += guna2Panel1_Paint;
             // 
             // guna2CirclePictureBox1
             // 

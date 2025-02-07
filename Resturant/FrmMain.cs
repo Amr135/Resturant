@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Resturant.View;
 
 namespace Resturant
 {
@@ -15,17 +16,26 @@ namespace Resturant
         public FrmMain()
         {
             InitializeComponent();
+
         }
 
         private void guna2ControlBox2_Click(object sender, EventArgs e)
         {
             Application.Exit();
-           
+
+        }
+        public void AddControls(Form f)
+        {
+            CentralPanel.Controls.Clear();
+            f.Dock = DockStyle.Fill;
+            f.TopLevel = false;
+            CentralPanel.Controls.Add(f);
+            f.Show();
         }
 
-        private void guna2Panel3_Paint(object sender, PaintEventArgs e)
+        private void btnCatogries_Click(object sender, EventArgs e)
         {
-
+            AddControls(new frmCategoryView());
         }
     }
 }

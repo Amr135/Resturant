@@ -126,6 +126,8 @@
             btnKitchen.AutoRoundedCorners = true;
             btnKitchen.BackColor = Color.Transparent;
             btnKitchen.BorderRadius = 27;
+            btnKitchen.ButtonMode = Guna.UI2.WinForms.Enums.ButtonMode.RadioButton;
+            btnKitchen.CheckedState.FillColor = Color.FromArgb(0, 192, 192);
             btnKitchen.CustomizableEdges = customizableEdges5;
             btnKitchen.DisabledState.BorderColor = Color.DarkGray;
             btnKitchen.DisabledState.CustomBorderColor = Color.DarkGray;
@@ -152,6 +154,8 @@
             btnOrders.AutoRoundedCorners = true;
             btnOrders.BackColor = Color.Transparent;
             btnOrders.BorderRadius = 27;
+            btnOrders.ButtonMode = Guna.UI2.WinForms.Enums.ButtonMode.RadioButton;
+            btnOrders.CheckedState.FillColor = Color.FromArgb(0, 192, 192);
             btnOrders.CustomizableEdges = customizableEdges7;
             btnOrders.DisabledState.BorderColor = Color.DarkGray;
             btnOrders.DisabledState.CustomBorderColor = Color.DarkGray;
@@ -178,6 +182,8 @@
             btnSettings.AutoRoundedCorners = true;
             btnSettings.BackColor = Color.Transparent;
             btnSettings.BorderRadius = 27;
+            btnSettings.ButtonMode = Guna.UI2.WinForms.Enums.ButtonMode.RadioButton;
+            btnSettings.CheckedState.FillColor = Color.FromArgb(0, 192, 192);
             btnSettings.CustomizableEdges = customizableEdges9;
             btnSettings.DisabledState.BorderColor = Color.DarkGray;
             btnSettings.DisabledState.CustomBorderColor = Color.DarkGray;
@@ -204,6 +210,8 @@
             btnStaff.AutoRoundedCorners = true;
             btnStaff.BackColor = Color.Transparent;
             btnStaff.BorderRadius = 27;
+            btnStaff.ButtonMode = Guna.UI2.WinForms.Enums.ButtonMode.RadioButton;
+            btnStaff.CheckedState.FillColor = Color.FromArgb(0, 192, 192);
             btnStaff.CustomizableEdges = customizableEdges11;
             btnStaff.DisabledState.BorderColor = Color.DarkGray;
             btnStaff.DisabledState.CustomBorderColor = Color.DarkGray;
@@ -230,6 +238,8 @@
             btnCatogries.AutoRoundedCorners = true;
             btnCatogries.BackColor = Color.Transparent;
             btnCatogries.BorderRadius = 27;
+            btnCatogries.ButtonMode = Guna.UI2.WinForms.Enums.ButtonMode.RadioButton;
+            btnCatogries.CheckedState.FillColor = Color.FromArgb(0, 192, 192);
             btnCatogries.CustomizableEdges = customizableEdges13;
             btnCatogries.DisabledState.BorderColor = Color.DarkGray;
             btnCatogries.DisabledState.CustomBorderColor = Color.DarkGray;
@@ -257,6 +267,8 @@
             btnProducts.AutoRoundedCorners = true;
             btnProducts.BackColor = Color.Transparent;
             btnProducts.BorderRadius = 27;
+            btnProducts.ButtonMode = Guna.UI2.WinForms.Enums.ButtonMode.RadioButton;
+            btnProducts.CheckedState.FillColor = Color.FromArgb(0, 192, 192);
             btnProducts.CustomizableEdges = customizableEdges15;
             btnProducts.DisabledState.BorderColor = Color.DarkGray;
             btnProducts.DisabledState.CustomBorderColor = Color.DarkGray;
@@ -283,6 +295,8 @@
             btnHome.AutoRoundedCorners = true;
             btnHome.BackColor = Color.Transparent;
             btnHome.BorderRadius = 27;
+            btnHome.ButtonMode = Guna.UI2.WinForms.Enums.ButtonMode.RadioButton;
+            btnHome.CheckedState.FillColor = Color.FromArgb(0, 192, 192);
             btnHome.CustomizableEdges = customizableEdges17;
             btnHome.DisabledState.BorderColor = Color.DarkGray;
             btnHome.DisabledState.CustomBorderColor = Color.DarkGray;

@@ -35,7 +35,8 @@ namespace Resturant
 
         private void btnCatogries_Click(object sender, EventArgs e)
         {
-            AddControls(new frmCategoryView());
+          frmCategoryView f=  new frmCategoryView();
+            AddControls(f);
         }
     }
 }

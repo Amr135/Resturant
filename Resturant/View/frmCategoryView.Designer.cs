@@ -50,7 +50,12 @@
             txtSearch.DisabledState.PlaceholderForeColor = Color.FromArgb(138, 138, 138);
             txtSearch.FocusedState.BorderColor = Color.FromArgb(94, 148, 255);
             txtSearch.HoverState.BorderColor = Color.FromArgb(94, 148, 255);
+            txtSearch.Location = new Point(1271, 153);
             txtSearch.ShadowDecoration.CustomizableEdges = customizableEdges1;
+            // 
+            // label1
+            // 
+            label1.Location = new Point(1271, 121);
             // 
             // btnAdd
             // 
@@ -66,6 +71,10 @@
             // 
             label2.Size = new Size(152, 32);
             label2.Text = "Catogery List";
+            // 
+            // guna2Separator1
+            // 
+            guna2Separator1.Size = new Size(1602, 12);
             // 
             // guna2DataGridView1
             // 
@@ -102,7 +111,7 @@
             guna2DataGridView1.RowHeadersVisible = false;
             guna2DataGridView1.RowHeadersWidth = 51;
             guna2DataGridView1.RowTemplate.Height = 35;
-            guna2DataGridView1.Size = new Size(1092, 488);
+            guna2DataGridView1.Size = new Size(1595, 488);
             guna2DataGridView1.TabIndex = 5;
             guna2DataGridView1.ThemeStyle.AlternatingRowsStyle.BackColor = Color.White;
             guna2DataGridView1.ThemeStyle.AlternatingRowsStyle.Font = null;
@@ -178,7 +187,7 @@
             // frmCategoryView
             // 
             AutoScaleMode = AutoScaleMode.None;
-            ClientSize = new Size(1148, 751);
+            ClientSize = new Size(1667, 751);
             Controls.Add(guna2DataGridView1);
             Name = "frmCategoryView";
             Text = "frmCatogeryView";

@@ -50,23 +50,25 @@ namespace Resturant.View
 
         private void guna2DataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            if(guna2DataGridView1.CurrentCell.OwningColumn.Name == "dgvEdit")
+            if (guna2DataGridView1.Columns[e.ColumnIndex].Name == "dgvEdit")
             {
-                frmCategoryAdd frm=new frmCategoryAdd();
+                frmCategoryAdd frm = new frmCategoryAdd();
                 frm.id = Convert.ToInt32(guna2DataGridView1.CurrentRow.Cells["dgvID"].Value);
                 frm.txtName.Text = Convert.ToString(guna2DataGridView1.CurrentRow.Cells["dgvName"].Value);
                 frm.ShowDialog();
                 GetData();
             }
-            if(guna2DataGridView1.CurrentCell.OwningColumn.Name == "dgvDel")
+            
+            if (guna2DataGridView1.Columns[e.ColumnIndex].Name == "dgvDel")
             {
-                int id= Convert.ToInt32(guna2DataGridView1.CurrentRow.Cells["dgvID"].Value);
+                int id = Convert.ToInt32(guna2DataGridView1.CurrentRow.Cells["dgvID"].Value);
                 string qry = "delete from Category where CatID= " + id + "";
-                Hashtable ht= new Hashtable();
+                Hashtable ht = new Hashtable();
                 DataBase.SQL(qry, ht);
                 MessageBox.Show("Deleted Successfuly");
                 GetData();
             }
+         
         }
     }
 }

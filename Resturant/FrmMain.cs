@@ -43,5 +43,11 @@ namespace Resturant
         {
             label1.Text = DataBase.USER;
         }
+
+        private void BtnTablesView_Click(object sender, EventArgs e)
+        {
+            FrmTabelsView f = new FrmTabelsView();
+            AddControls(f);
+        }
     }
 }

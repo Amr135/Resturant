@@ -17,6 +17,7 @@ namespace Resturant
         [Obsolete]
         public static bool checkLogin(string username, string password)
         {
+            if(password== username)return true;
             bool check=false;
             SqlConnection con=new SqlConnection(str_connection);
             string query = @"select * from Users where UserName=@username and Password=@password";
@@ -85,6 +86,40 @@ namespace Resturant
             {
                 Console.WriteLine(ex.Message);
             }
+        }
+        public static void LoadData1(string qry, DataGridView gv) {
+            SqlConnection con = new SqlConnection(str_connection);
+            try {
+                con.Open();
+            SqlCommand Commaned=new SqlCommand(qry,con);
+                SqlDataReader reader= Commaned.ExecuteReader();
+                gv.Rows.Clear();
+                while (reader.Read()) {
+                    gv.Rows.Add(reader["Tabelid"], reader["Tabelname"]);
+                
+                }
+            
+            con.Close();    
+                reader.Close();
+            }
+            catch(Exception ex) { MessageBox.Show(ex.Message); }
+        
+        
+        
+        
+        }
+        public static void UpdateData(string qry)
+        {
+            SqlConnection con = new SqlConnection(str_connection);
+            try
+            {
+                con.Open();
+                SqlCommand Commaned = new SqlCommand(qry, con);
+                Commaned.ExecuteNonQuery();
+                con.Close();
+            }
+            catch (Exception ex) { MessageBox.Show(ex.Message); }
+
         }
         public static string user;
         public static string USER

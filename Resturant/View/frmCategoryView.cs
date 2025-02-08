@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -17,19 +18,55 @@ namespace Resturant.View
         {
             InitializeComponent();
         }
+        public void GetData()
+        {
+            string query = "select * from Category where CatName like '%" + txtSearch.Text + "%'";
+            ListBox lb = new ListBox();
+            lb.Items.Add(dgvid);
+            lb.Items.Add(dgvName);
+            DataBase.LoadData(query, guna2DataGridView1, lb);
+        }
         public override void btnAdd_Click(object sender, EventArgs e)
         {
-
+            frmCategoryAdd frm = new frmCategoryAdd();
+            frm.ShowDialog();
+            GetData();
         }
 
         public override void txtSearch_TextChanged(object sender, EventArgs e)
         {
+            GetData();
+        }
+
+        private void frmCategoryView_Load(object sender, EventArgs e)
+        {
+            GetData();
+        }
+
+        private void txtSearch_TextChanged_1(object sender, EventArgs e)
+        {
 
         }
 
-        private void btnAdd_Click_1(object sender, EventArgs e)
+        private void guna2DataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            new frmCategoryAdd().Visible = true;
+            if(guna2DataGridView1.CurrentCell.OwningColumn.Name == "dgvEdit")
+            {
+                frmCategoryAdd frm=new frmCategoryAdd();
+                frm.id = Convert.ToInt32(guna2DataGridView1.CurrentRow.Cells["dgvID"].Value);
+                frm.txtName.Text = Convert.ToString(guna2DataGridView1.CurrentRow.Cells["dgvName"].Value);
+                frm.ShowDialog();
+                GetData();
+            }
+            if(guna2DataGridView1.CurrentCell.OwningColumn.Name == "dgvDel")
+            {
+                int id= Convert.ToInt32(guna2DataGridView1.CurrentRow.Cells["dgvID"].Value);
+                string qry = "delete from Category where CatID= " + id + "";
+                Hashtable ht= new Hashtable();
+                DataBase.SQL(qry, ht);
+                MessageBox.Show("Deleted Successfuly");
+                GetData();
+            }
         }
     }
 }

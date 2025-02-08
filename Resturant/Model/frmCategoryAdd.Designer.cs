@@ -109,6 +109,7 @@
             txtName.HoverState.BorderColor = Color.FromArgb(94, 148, 255);
             txtName.Location = new Point(82, 187);
             txtName.Margin = new Padding(3, 4, 3, 4);
+            txtName.Modified = true;
             txtName.Name = "txtName";
             txtName.PasswordChar = '\0';
             txtName.PlaceholderText = "";
@@ -141,6 +142,6 @@
         #endregion
 
         private Label label2;
-        private Guna.UI2.WinForms.Guna2TextBox txtName;
+        public Guna.UI2.WinForms.Guna2TextBox txtName;
     }
 }

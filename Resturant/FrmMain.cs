@@ -35,8 +35,13 @@ namespace Resturant
 
         private void btnCatogries_Click(object sender, EventArgs e)
         {
-          frmCategoryView f=  new frmCategoryView();
+            frmCategoryView f = new frmCategoryView();
             AddControls(f);
+        }
+
+        private void FrmMain_Load(object sender, EventArgs e)
+        {
+            label1.Text = DataBase.USER;
         }
     }
 }

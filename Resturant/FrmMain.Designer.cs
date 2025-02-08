@@ -71,6 +71,7 @@
             guna2Panel2 = new Guna.UI2.WinForms.Guna2Panel();
             guna2ControlBox3 = new Guna.UI2.WinForms.Guna2ControlBox();
             CentralPanel = new Guna.UI2.WinForms.Guna2Panel();
+            label1 = new Label();
             guna2Panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)guna2PictureBox1).BeginInit();
             guna2Panel2.SuspendLayout();
@@ -334,6 +335,7 @@
             // guna2Panel2
             // 
             guna2Panel2.BackColor = Color.LightGray;
+            guna2Panel2.Controls.Add(label1);
             guna2Panel2.Controls.Add(guna2ControlBox2);
             guna2Panel2.Controls.Add(guna2ControlBox3);
             guna2Panel2.Controls.Add(guna2ControlBox1);
@@ -369,6 +371,16 @@
             CentralPanel.Size = new Size(968, 622);
             CentralPanel.TabIndex = 2;
             // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label1.Location = new Point(25, 20);
+            label1.Name = "label1";
+            label1.Size = new Size(65, 28);
+            label1.TabIndex = 1;
+            label1.Text = "label1";
+            // 
             // FrmMain
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
@@ -381,9 +393,11 @@
             Name = "FrmMain";
             Text = "FrmMain";
             WindowState = FormWindowState.Maximized;
+            Load += FrmMain_Load;
             guna2Panel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)guna2PictureBox1).EndInit();
             guna2Panel2.ResumeLayout(false);
+            guna2Panel2.PerformLayout();
             ResumeLayout(false);
         }
 
@@ -403,5 +417,6 @@
         private Guna.UI2.WinForms.Guna2Button btnSettings;
         private Guna.UI2.WinForms.Guna2Button btnStaff;
         private Guna.UI2.WinForms.Guna2Panel CentralPanel;
+        private Label label1;
     }
 }

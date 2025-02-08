@@ -1,6 +1,6 @@
 ﻿namespace Resturant.View
 {
-    partial class frmCategoryView
+    partial class frmStaffView
     {
         /// <summary>
         /// Required designer variable.
@@ -37,6 +37,8 @@
             dgvSno = new DataGridViewTextBoxColumn();
             dgvid = new DataGridViewTextBoxColumn();
             dgvName = new DataGridViewTextBoxColumn();
+            dgvPone = new DataGridViewTextBoxColumn();
+            dgvRole = new DataGridViewTextBoxColumn();
             dgvEdit = new DataGridViewImageColumn();
             dgvDel = new DataGridViewImageColumn();
             ((System.ComponentModel.ISupportInitialize)guna2DataGridView1).BeginInit();
@@ -50,13 +52,13 @@
             txtSearch.DisabledState.PlaceholderForeColor = Color.FromArgb(138, 138, 138);
             txtSearch.FocusedState.BorderColor = Color.FromArgb(94, 148, 255);
             txtSearch.HoverState.BorderColor = Color.FromArgb(94, 148, 255);
-            txtSearch.Location = new Point(768, 153);
+            txtSearch.Location = new Point(653, 134);
             txtSearch.ShadowDecoration.CustomizableEdges = customizableEdges1;
-            txtSearch.TextChanged += txtSearch_TextChanged_1;
             // 
             // label1
             // 
-            label1.Location = new Point(1005, 126);
+            label1.Location = new Point(653, 107);
+            label1.Click += label1_Click;
             // 
             // btnAdd
             // 
@@ -69,8 +71,12 @@
             // 
             // label2
             // 
-            label2.Size = new Size(152, 32);
-            label2.Text = "Catogery List";
+            label2.Size = new Size(104, 32);
+            label2.Text = "Staff List";
+            // 
+            // guna2Separator1
+            // 
+            guna2Separator1.Size = new Size(968, 12);
             // 
             // guna2DataGridView1
             // 
@@ -91,7 +97,7 @@
             guna2DataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
             guna2DataGridView1.ColumnHeadersHeight = 40;
             guna2DataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.EnableResizing;
-            guna2DataGridView1.Columns.AddRange(new DataGridViewColumn[] { dgvSno, dgvid, dgvName, dgvEdit, dgvDel });
+            guna2DataGridView1.Columns.AddRange(new DataGridViewColumn[] { dgvSno, dgvid, dgvName, dgvPone, dgvRole, dgvEdit, dgvDel });
             dataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle3.BackColor = Color.FromArgb(232, 234, 237);
             dataGridViewCellStyle3.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point, 0);
@@ -101,14 +107,14 @@
             dataGridViewCellStyle3.WrapMode = DataGridViewTriState.False;
             guna2DataGridView1.DefaultCellStyle = dataGridViewCellStyle3;
             guna2DataGridView1.GridColor = Color.FromArgb(231, 229, 255);
-            guna2DataGridView1.Location = new Point(38, 228);
+            guna2DataGridView1.Location = new Point(31, 228);
             guna2DataGridView1.Name = "guna2DataGridView1";
             guna2DataGridView1.ReadOnly = true;
             guna2DataGridView1.RowHeadersVisible = false;
             guna2DataGridView1.RowHeadersWidth = 51;
             guna2DataGridView1.RowTemplate.Height = 35;
-            guna2DataGridView1.Size = new Size(1394, 488);
-            guna2DataGridView1.TabIndex = 5;
+            guna2DataGridView1.Size = new Size(968, 537);
+            guna2DataGridView1.TabIndex = 6;
             guna2DataGridView1.ThemeStyle.AlternatingRowsStyle.BackColor = Color.White;
             guna2DataGridView1.ThemeStyle.AlternatingRowsStyle.Font = null;
             guna2DataGridView1.ThemeStyle.AlternatingRowsStyle.ForeColor = Color.Empty;
@@ -130,7 +136,6 @@
             guna2DataGridView1.ThemeStyle.RowsStyle.Height = 35;
             guna2DataGridView1.ThemeStyle.RowsStyle.SelectionBackColor = Color.FromArgb(231, 229, 255);
             guna2DataGridView1.ThemeStyle.RowsStyle.SelectionForeColor = Color.FromArgb(71, 69, 94);
-            guna2DataGridView1.CellClick += guna2DataGridView1_CellClick;
             // 
             // dgvSno
             // 
@@ -157,6 +162,20 @@
             dgvName.Name = "dgvName";
             dgvName.ReadOnly = true;
             // 
+            // dgvPone
+            // 
+            dgvPone.HeaderText = "Phone";
+            dgvPone.MinimumWidth = 6;
+            dgvPone.Name = "dgvPone";
+            dgvPone.ReadOnly = true;
+            // 
+            // dgvRole
+            // 
+            dgvRole.HeaderText = "Role";
+            dgvRole.MinimumWidth = 6;
+            dgvRole.Name = "dgvRole";
+            dgvRole.ReadOnly = true;
+            // 
             // dgvEdit
             // 
             dgvEdit.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
@@ -181,14 +200,14 @@
             dgvDel.ReadOnly = true;
             dgvDel.Width = 50;
             // 
-            // frmCategoryView
+            // frmStaffView
             // 
-            AutoScaleMode = AutoScaleMode.None;
-            ClientSize = new Size(1444, 751);
+            AutoScaleDimensions = new SizeF(9F, 23F);
+            AutoScaleMode = AutoScaleMode.Font;
+            ClientSize = new Size(1027, 777);
             Controls.Add(guna2DataGridView1);
-            Name = "frmCategoryView";
-            Text = "frmCatogeryView";
-            Load += frmCategoryView_Load;
+            Name = "frmStaffView";
+            Text = "frmStaffView";
             Controls.SetChildIndex(txtSearch, 0);
             Controls.SetChildIndex(label1, 0);
             Controls.SetChildIndex(btnAdd, 0);
@@ -206,6 +225,8 @@
         private DataGridViewTextBoxColumn dgvSno;
         private DataGridViewTextBoxColumn dgvid;
         private DataGridViewTextBoxColumn dgvName;
+        private DataGridViewTextBoxColumn dgvPone;
+        private DataGridViewTextBoxColumn dgvRole;
         private DataGridViewImageColumn dgvEdit;
         private DataGridViewImageColumn dgvDel;
     }

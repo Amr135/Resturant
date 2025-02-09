@@ -18,7 +18,8 @@ namespace Resturant
             InitializeComponent();
 
         }
-
+        private static FrmMain _obj;
+        public static FrmMain Instance { get { if (_obj == null) _obj = new FrmMain(); return _obj; } }
         private void guna2ControlBox2_Click(object sender, EventArgs e)
         {
             Application.Exit();
@@ -42,12 +43,18 @@ namespace Resturant
         private void FrmMain_Load(object sender, EventArgs e)
         {
             label1.Text = DataBase.USER;
+            _obj = this;
         }
 
         private void BtnTablesView_Click(object sender, EventArgs e)
         {
             FrmTabelsView f = new FrmTabelsView();
             AddControls(f);
+        }
+
+        private void guna2Panel2_Paint(object sender, PaintEventArgs e)
+        {
+
         }
     }
 }

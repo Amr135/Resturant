@@ -24,12 +24,11 @@ namespace Resturant.View
             ListBox lb = new ListBox();
             lb.Items.Add(dgvid);
             lb.Items.Add(dgvName);
-            DataBase.LoadData(query, guna2DataGridView1, lb);
+            DataBase.LoadData(query, DataGridView1, lb);
         }
         public override void btnAdd_Click(object sender, EventArgs e)
         {
-            frmCategoryAdd frm = new frmCategoryAdd();
-            frm.ShowDialog();
+            Utility.BlurBackGround(new frmCategoryAdd());
             GetData();
         }
 
@@ -50,18 +49,18 @@ namespace Resturant.View
 
         private void guna2DataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (guna2DataGridView1.Columns[e.ColumnIndex].Name == "dgvEdit")
+            if (DataGridView1.Columns[e.ColumnIndex].Name == "dgvEdit")
             {
                 frmCategoryAdd frm = new frmCategoryAdd();
-                frm.id = Convert.ToInt32(guna2DataGridView1.CurrentRow.Cells["dgvID"].Value);
-                frm.txtName.Text = Convert.ToString(guna2DataGridView1.CurrentRow.Cells["dgvName"].Value);
+                frm.id = Convert.ToInt32(DataGridView1.CurrentRow.Cells["dgvID"].Value);
+                frm.txtName.Text = Convert.ToString(DataGridView1.CurrentRow.Cells["dgvName"].Value);
                 frm.ShowDialog();
                 GetData();
             }
             
-            if (guna2DataGridView1.Columns[e.ColumnIndex].Name == "dgvDel")
+            if (DataGridView1.Columns[e.ColumnIndex].Name == "dgvDel")
             {
-                int id = Convert.ToInt32(guna2DataGridView1.CurrentRow.Cells["dgvID"].Value);
+                int id = Convert.ToInt32(DataGridView1.CurrentRow.Cells["dgvID"].Value);
                 string qry = "delete from Category where CatID= " + id + "";
                 Hashtable ht = new Hashtable();
                 DataBase.SQL(qry, ht);

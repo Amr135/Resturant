@@ -34,6 +34,8 @@
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges4 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges23 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges24 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges5 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges6 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges7 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges8 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges9 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
@@ -57,11 +59,10 @@
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges26 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges29 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges30 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges5 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges6 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             guna2ControlBox1 = new Guna.UI2.WinForms.Guna2ControlBox();
             guna2ControlBox2 = new Guna.UI2.WinForms.Guna2ControlBox();
             guna2Panel1 = new Guna.UI2.WinForms.Guna2Panel();
+            BtnTablesView = new Guna.UI2.WinForms.Guna2Button();
             btnKitchen = new Guna.UI2.WinForms.Guna2Button();
             btnOrders = new Guna.UI2.WinForms.Guna2Button();
             btnSettings = new Guna.UI2.WinForms.Guna2Button();
@@ -74,7 +75,6 @@
             label1 = new Label();
             guna2ControlBox3 = new Guna.UI2.WinForms.Guna2ControlBox();
             CentralPanel = new Guna.UI2.WinForms.Guna2Panel();
-            BtnTablesView = new Guna.UI2.WinForms.Guna2Button();
             guna2Panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)guna2PictureBox1).BeginInit();
             guna2Panel2.SuspendLayout();
@@ -125,6 +125,35 @@
             guna2Panel1.ShadowDecoration.CustomizableEdges = customizableEdges24;
             guna2Panel1.Size = new Size(250, 676);
             guna2Panel1.TabIndex = 2;
+            // 
+            // BtnTablesView
+            // 
+            BtnTablesView.AutoRoundedCorners = true;
+            BtnTablesView.BackColor = Color.Transparent;
+            BtnTablesView.BorderRadius = 27;
+            BtnTablesView.ButtonMode = Guna.UI2.WinForms.Enums.ButtonMode.RadioButton;
+            BtnTablesView.CheckedState.FillColor = Color.FromArgb(0, 192, 192);
+            BtnTablesView.CustomizableEdges = customizableEdges5;
+            BtnTablesView.DisabledState.BorderColor = Color.DarkGray;
+            BtnTablesView.DisabledState.CustomBorderColor = Color.DarkGray;
+            BtnTablesView.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
+            BtnTablesView.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
+            BtnTablesView.FillColor = Color.Transparent;
+            BtnTablesView.Font = new Font("Segoe UI", 9F);
+            BtnTablesView.ForeColor = Color.White;
+            BtnTablesView.Image = Properties.Resources.table1;
+            BtnTablesView.ImageAlign = HorizontalAlignment.Left;
+            BtnTablesView.ImageOffset = new Point(10, 0);
+            BtnTablesView.ImageSize = new Size(30, 30);
+            BtnTablesView.Location = new Point(28, 617);
+            BtnTablesView.Name = "BtnTablesView";
+            BtnTablesView.ShadowDecoration.CustomizableEdges = customizableEdges6;
+            BtnTablesView.Size = new Size(181, 56);
+            BtnTablesView.TabIndex = 6;
+            BtnTablesView.Text = "Tables";
+            BtnTablesView.TextAlign = HorizontalAlignment.Left;
+            BtnTablesView.TextOffset = new Point(20, 0);
+            BtnTablesView.Click += BtnTablesView_Click;
             // 
             // btnKitchen
             // 
@@ -351,6 +380,7 @@
             guna2Panel2.ShadowDecoration.CustomizableEdges = customizableEdges28;
             guna2Panel2.Size = new Size(968, 54);
             guna2Panel2.TabIndex = 2;
+            guna2Panel2.Paint += guna2Panel2_Paint;
             // 
             // label1
             // 
@@ -384,35 +414,6 @@
             CentralPanel.ShadowDecoration.CustomizableEdges = customizableEdges30;
             CentralPanel.Size = new Size(968, 622);
             CentralPanel.TabIndex = 2;
-            // 
-            // BtnTablesView
-            // 
-            BtnTablesView.AutoRoundedCorners = true;
-            BtnTablesView.BackColor = Color.Transparent;
-            BtnTablesView.BorderRadius = 27;
-            BtnTablesView.ButtonMode = Guna.UI2.WinForms.Enums.ButtonMode.RadioButton;
-            BtnTablesView.CheckedState.FillColor = Color.FromArgb(0, 192, 192);
-            BtnTablesView.CustomizableEdges = customizableEdges5;
-            BtnTablesView.DisabledState.BorderColor = Color.DarkGray;
-            BtnTablesView.DisabledState.CustomBorderColor = Color.DarkGray;
-            BtnTablesView.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
-            BtnTablesView.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
-            BtnTablesView.FillColor = Color.Transparent;
-            BtnTablesView.Font = new Font("Segoe UI", 9F);
-            BtnTablesView.ForeColor = Color.White;
-            BtnTablesView.Image = Properties.Resources.table1;
-            BtnTablesView.ImageAlign = HorizontalAlignment.Left;
-            BtnTablesView.ImageOffset = new Point(10, 0);
-            BtnTablesView.ImageSize = new Size(30, 30);
-            BtnTablesView.Location = new Point(28, 617);
-            BtnTablesView.Name = "BtnTablesView";
-            BtnTablesView.ShadowDecoration.CustomizableEdges = customizableEdges6;
-            BtnTablesView.Size = new Size(181, 56);
-            BtnTablesView.TabIndex = 6;
-            BtnTablesView.Text = "Tables";
-            BtnTablesView.TextAlign = HorizontalAlignment.Left;
-            BtnTablesView.TextOffset = new Point(20, 0);
-            BtnTablesView.Click += BtnTablesView_Click;
             // 
             // FrmMain
             // 

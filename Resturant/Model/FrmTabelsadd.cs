@@ -29,10 +29,11 @@ namespace Resturant
                query = "insert into tabels values('" + guna2TextBox1.Text + "')";
             }
             else {
-                 query = "Update tabels set tabelname=" + tablename + "where tabelid=" + id;
+                 query = "Update tabels set tabelname='" + guna2TextBox1.Text + "'where tabelid=" + id;
             }
                 DataBase.UpdateData(query);
-       
+            guna2TextBox1.Text = "";
+
         }
     }
 }

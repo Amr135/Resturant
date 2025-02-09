@@ -8,12 +8,14 @@ using System.Data.SqlClient;
 using Microsoft.VisualBasic.ApplicationServices;
 using System.Collections;
 using System.Data;
+using Guna.UI2.WinForms;
+
 namespace Resturant
 {
     internal  static class DataBase
     {
         public static string str_connection = "Server=.;Database=Resturant;User Id=sa;Password=123456;";
-
+   
         [Obsolete]
         public static bool checkLogin(string username, string password)
         {
@@ -65,6 +67,7 @@ namespace Resturant
         }
         public static void LoadData(string qry,DataGridView gv,ListBox lb)
         {
+           
             SqlConnection connection=new SqlConnection(str_connection);
             SqlCommand command=new SqlCommand(qry, connection);
             command.CommandType=CommandType.Text;
@@ -77,6 +80,7 @@ namespace Resturant
                 for (int i = 0; i < lb.Items.Count; i++)
                 {
                     string colName1 = ((DataGridViewColumn)lb.Items[i]).Name;
+                    
                     gv.Columns[colName1].DataPropertyName = dt.Columns[i].ToString();
 
                 }
@@ -88,38 +92,51 @@ namespace Resturant
             }
         }
         public static void LoadData1(string qry, DataGridView gv) {
-            SqlConnection con = new SqlConnection(str_connection);
-            try {
-                con.Open();
-            SqlCommand Commaned=new SqlCommand(qry,con);
-                SqlDataReader reader= Commaned.ExecuteReader();
-                gv.Rows.Clear();
-                while (reader.Read()) {
-                    gv.Rows.Add(reader["Tabelid"], reader["Tabelname"]);
-                
-                }
-            
-            con.Close();    
-                reader.Close();
+            bool q = false;
+            for (int i = gv.Rows.Count - 1; i > -1; i--)
+            {
+                if (gv.Rows[i].Visible || q)
+                    gv.Rows.RemoveAt(i);
+                else q = true;
             }
-            catch(Exception ex) { MessageBox.Show(ex.Message); }
-        
-        
-        
-        
-        }
-        public static void UpdateData(string qry)
-        {
+          
             SqlConnection con = new SqlConnection(str_connection);
             try
             {
+                int i = 0;
                 con.Open();
                 SqlCommand Commaned = new SqlCommand(qry, con);
-                Commaned.ExecuteNonQuery();
+                SqlDataReader reader = Commaned.ExecuteReader();
+              
+                while (reader.Read())
+                {
+                    gv.Rows.Add(reader["tabelid"], reader["tabelname"]);
+                }
+
+                reader.Close();
                 con.Close();
             }
             catch (Exception ex) { MessageBox.Show(ex.Message); }
-
+          
+        }
+        public static void UpdateData(string qry)
+        {
+            using (SqlConnection con = new SqlConnection(str_connection))
+            {
+                try
+                {
+                    con.Open();
+                    using (SqlCommand command = new SqlCommand(qry, con))
+                    {
+                        command.ExecuteNonQuery();
+                    }
+                }
+                catch (Exception ex)
+                {
+                   
+                    MessageBox.Show("Error executing query: " + ex.Message);
+                }
+            }
         }
         public static string user;
         public static string USER

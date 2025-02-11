@@ -8,7 +8,7 @@ namespace Resturant
 {
     internal static class Utility
     {
-        [Obsolete]
+ 
         public static void BlurBackGround(Form Frm)
         {
             Form BackGround=new Form();
@@ -20,7 +20,7 @@ namespace Resturant
                 BackGround.Size =FrmMain.Instance.Size;
                 BackGround.Location = FrmMain.Instance.Location;
                 BackGround.BackColor=Color.Black;
-                BackGround.ShowInTaskbar = false;
+                BackGround.ShowInTaskbar =false;//prevent show when put mouse on the icon of app
                 BackGround.Show();
                Frm.Owner=BackGround;
                 Frm.ShowDialog(BackGround);

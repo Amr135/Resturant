@@ -210,6 +210,7 @@
             btnOrders.Text = "Order";
             btnOrders.TextAlign = HorizontalAlignment.Left;
             btnOrders.TextOffset = new Point(20, 0);
+            btnOrders.Click += btnOrders_Click;
             // 
             // btnSettings
             // 
@@ -380,7 +381,7 @@
             guna2Panel2.ShadowDecoration.CustomizableEdges = customizableEdges28;
             guna2Panel2.Size = new Size(968, 54);
             guna2Panel2.TabIndex = 2;
-            guna2Panel2.Paint += guna2Panel2_Paint;
+     
             // 
             // label1
             // 

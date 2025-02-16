@@ -1,5 +1,6 @@
 ﻿using Guna.UI2.WinForms.Enums;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -18,16 +19,18 @@ namespace Resturant
         {
             InitializeComponent();
         }
-
+        public int Price = 0;
+        public string OrderType = "";
         private void FrmPos_Load(object sender, EventArgs e)
         {
             FillPanelCategory();
             fillPanelItem();
+            TxtTotal.Text = "0";
         }
         private void FillPanelCategory()
         {
             CategoryPanel.Controls.Clear();
-            string[] cate = { "Drink", "Meat", "Food","Burger" };
+            string[] cate = { "Drink", "Meat", "Food", "Burger" };
             int yOffset = 0;
 
             foreach (string c in cate)
@@ -52,9 +55,9 @@ namespace Resturant
                 UPrice = (int)reader["itPrice"],
                 UCategory = (string)reader["itCategory"],
                 Uimage = Image.FromStream(new MemoryStream((byte[])reader["itimage"]))
-                
+
             };
- 
+
             U.onselect += (s, e) =>
             {
                 bool q = true;
@@ -63,25 +66,27 @@ namespace Resturant
                 {
                     if (W.Uid == Convert.ToInt32(row.Cells["Dgvid"].Value))
                     {
+                        Price -= int.Parse(row.Cells["DgvAmont"].Value.ToString());
                         row.Cells["DgvQut"].Value = int.Parse(row.Cells["DgvQut"].Value.ToString()) + 1;
                         row.Cells["DgvAmont"].Value = int.Parse(row.Cells["DgvAmont"].Value.ToString()) + int.Parse(row.Cells["DgvPrice"].Value.ToString());
-                        q= false;
+                        TxtTotal.Text = (Price += int.Parse(row.Cells["DgvAmont"].Value.ToString())).ToString();
+                        q = false;
                     }
-                  
+
                 }
-                if(q)addtoDatagridview(W);
+                if (q) addtoDatagridview(W);
 
             };
-            
+
             return U;
         }
         private void addtoDatagridview(USproducts us)
         {
-            
-                DataGridView1.Rows.Add(new object[] { us.Uid, us.Uid,us.UName,1,us.UPrice, us.UPrice });
-             
-            
 
+            DataGridView1.Rows.Add(new object[] { us.Uid, us.Uid, us.UName, 1, us.UPrice, us.UPrice });
+
+            TxtTotal.Text = (Price += int.Parse(DataGridView1.Rows[DataGridView1.Rows.Count - 1].Cells["DgvAmont"].Value.ToString())).ToString();
+            TxtTotal.Text = (Price += int.Parse(DataGridView1.Rows[DataGridView1.Rows.Count - 1].Cells["DgvAmont"].Value.ToString())).ToString();
 
         }
         private void fillPanelItem()
@@ -103,11 +108,11 @@ namespace Resturant
             }
             catch (Exception ex) { MessageBox.Show(ex.Message); }
         }
-        private void  ShowSearchItemOrCategory(object sender,EventArgs e)
+        private void ShowSearchItemOrCategory(object sender, EventArgs e)
         {
-           
-             var T = (Guna.UI2.WinForms.Guna2Button)sender; 
-           
+
+            var T = (Guna.UI2.WinForms.Guna2Button)sender;
+
             foreach (var i in ItemesPanel.Controls)
             {
                 var b = (USproducts)i;
@@ -119,8 +124,100 @@ namespace Resturant
             foreach (var i in ItemesPanel.Controls)
             {
                 var b = (USproducts)i;
-                b.Visible = guna2TextBox1.Text.ToLower().Contains(b.UName.Trim().ToLower());
+                b.Visible = b.UName.ToLower().Contains(guna2TextBox1.Text.ToLower());
             }
+        }
+        private void resete()
+        {
+            LbTable.Text = "";
+            LbWaiter.Text = "";
+            DataGridView1.Rows.Clear();
+            LbWaiter.Visible =
+            LbTable.Visible = false;
+
+        }
+        private void BtnNew_Click(object sender, EventArgs e)
+        {
+            resete();
+        }
+
+        private void BtnDelevery_Click(object sender, EventArgs e)
+        {
+            resete();
+            OrderType = "Delevery";
+
+        }
+
+        private void BtnTakeaway_Click(object sender, EventArgs e)
+        {
+            resete();
+            OrderType = "Take away";
+        }
+
+        private void BtnDinin_Click(object sender, EventArgs e)
+        {
+            OrderType = "Din in";
+            FrmTablesState F = new FrmTablesState();
+            F.ShowDialog();
+            LbTable.Text = F.LbTableChoosen.Text;
+            LbTable.Visible = true;
+        }
+
+        private void BtnKot_Click(object sender, EventArgs e)
+        {
+            if (DataGridView1.Rows.Count == 0)
+            {
+                MessageBox.Show("No Item was Choosed Yet ,Pleas Choose on Item At least");
+                return;
+            }
+            SendOrderDetailstoDatabase();
+            resete();
+        }
+        private void SendOrderDetailstoDatabase()
+        {
+            
+            SqlCommand command;
+            string query = "select  Itname from Items";
+            Dictionary<string, int> Ht = new Dictionary<string, int>();
+            command = new SqlCommand(query, DataBase.conn);
+            try
+            {
+                string comqueryone="", comquerytwo="";
+                string comquery1 = "", comquery2 = "";
+                DataBase.conn.Open();
+                SqlDataReader reader = command.ExecuteReader();
+
+                while (reader.Read()) Ht[reader["itname"].ToString().ToLower()] = 0;
+                reader.Close();
+                foreach (DataGridViewRow row in DataGridView1.Rows)
+                {
+                     Ht[row.Cells["DgvName"].Value.ToString().ToLower()] = int.Parse(row.Cells["DgvQut"].Value.ToString());
+                }
+                foreach (KeyValuePair<string, int> I in Ht)
+                {
+                    comqueryone += I.Key+",";
+                    comquerytwo += "@" + I.Key + ",";
+                }
+                comquery1 = comqueryone.Substring(0, comqueryone.Length - 1);
+                comquery2 = comquerytwo.Substring(0, comquerytwo.Length - 1);
+
+
+                query = "insert into orderDetails  ("+comquery1+",price,Tnumber) Values("+comquery2+",@Price,@Tnumber)";
+
+                command = new SqlCommand(query, DataBase.conn);
+                foreach (KeyValuePair<string, int> I in Ht)
+                {
+                    command.Parameters.AddWithValue("@" + I.Key , I.Value);
+                }
+                command.Parameters.AddWithValue("@Price", Price);
+                int Tnumebr = int.Parse(LbTable.Text[LbTable.Text.Length - 1].ToString());
+                command.Parameters.AddWithValue("@Tnumber",Tnumebr );
+                command.ExecuteNonQuery();
+                DataBase.conn.Close();
+            }
+            catch
+            (Exception ex)
+            { MessageBox.Show(ex.Message); DataBase.conn.Close(); }
         }
     }
 }

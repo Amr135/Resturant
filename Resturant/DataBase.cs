@@ -15,7 +15,7 @@ namespace Resturant
     internal  static class DataBase
     {
         public static string str_connection = "Server=.;Database=Resturant;User Id=sa;Password=123456;";
-   
+     public static   SqlConnection conn = new SqlConnection(str_connection);
         [Obsolete]
         public static bool checkLogin(string username, string password)
         {
@@ -110,7 +110,7 @@ namespace Resturant
               
                 while (reader.Read())
                 {
-                    gv.Rows.Add(reader["tabelid"], reader["tabelname"]);
+                    gv.Rows.Add(reader["tableid"], reader["tablename"]);
                 }
 
                 reader.Close();

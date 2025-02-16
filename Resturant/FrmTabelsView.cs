@@ -20,7 +20,7 @@ namespace Resturant
         }
         public void GetDataTables()
         {
-            string query = "select * From Tabels where tabelName like '%" + txtSearch.Text + "%'";
+            string query = "select * From Tables where tableName like '%" + txtSearch.Text + "%'";
             //ListBox lb = new ListBox();
             //lb.Items.Add(SR);
             //lb.Items.Add(Tname);
@@ -59,9 +59,8 @@ namespace Resturant
                 FrmTabelsadd f = new FrmTabelsadd();
                 f.update = int.Parse(id) > 0 ? true : false;
                 f.id = id;
-                f.tablename = DataGridView1.Rows[e.RowIndex].Cells["Tname"].Value.ToString();
                 f.ShowDialog();
-                DataGridView1.Rows[e.RowIndex].Cells["Tname"].Value = f.guna2TextBox1.Text;
+                DataGridView1.Rows[e.RowIndex].Cells["Tname"].Value = f.tablename;
             }
             else
           if (DataGridView1.Columns[e.ColumnIndex].Name.ToString() == "Delete")

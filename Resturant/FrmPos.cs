@@ -143,14 +143,14 @@ namespace Resturant
 
         private void BtnDelevery_Click(object sender, EventArgs e)
         {
-            resete();
+           // resete();
             OrderType = "Delevery";
 
         }
 
         private void BtnTakeaway_Click(object sender, EventArgs e)
         {
-            resete();
+           // resete();
             OrderType = "Take away";
         }
 
@@ -170,10 +170,16 @@ namespace Resturant
                 MessageBox.Show("No Item was Choosed Yet ,Pleas Choose on Item At least");
                 return;
             }
-            SendOrderDetailstoDatabase();
-            resete();
+            if (SendOrderDetailstoDatabase())
+            {
+                DataBase.UpdateData("Update Tables set Tstate=1 where  Tablename='" + LbTable.Text+"'");
+                MessageBox.Show("success order");
+                resete();
+            }
+            else
+                MessageBox.Show("failed order");
         }
-        private void SendOrderDetailstoDatabase()
+        private bool SendOrderDetailstoDatabase()
         {
             
             SqlCommand command;
@@ -202,22 +208,25 @@ namespace Resturant
                 comquery2 = comquerytwo.Substring(0, comquerytwo.Length - 1);
 
 
-                query = "insert into orderDetails  ("+comquery1+",price,Tnumber) Values("+comquery2+",@Price,@Tnumber)";
+                query = "insert into orderDetails  ("+comquery1+ ",Tnumber,orderType,price) Values(" + comquery2+ ",@Tnumber,@orderType,@Price)";
 
                 command = new SqlCommand(query, DataBase.conn);
                 foreach (KeyValuePair<string, int> I in Ht)
                 {
                     command.Parameters.AddWithValue("@" + I.Key , I.Value);
                 }
+
+                command.Parameters.AddWithValue("@Tnumber", LbTable.Text);
+                command.Parameters.AddWithValue("@orderType", OrderType);
                 command.Parameters.AddWithValue("@Price", Price);
-                int Tnumebr = int.Parse(LbTable.Text[LbTable.Text.Length - 1].ToString());
-                command.Parameters.AddWithValue("@Tnumber",Tnumebr );
+          
                 command.ExecuteNonQuery();
                 DataBase.conn.Close();
+                return true;
             }
             catch
             (Exception ex)
-            { MessageBox.Show(ex.Message); DataBase.conn.Close(); }
+            { MessageBox.Show(ex.Message); DataBase.conn.Close();return false; }
         }
     }
 }

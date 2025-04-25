@@ -20,7 +20,7 @@ namespace Resturant.View
         }
         public void GetData()
         {
-            string query = "select * from Category where CatName like '%" + txtSearch.Text + "%'";
+            string query = "select * from Category where Category_Name like '%" + txtSearch.Text + "%'";
             ListBox lb = new ListBox();
             lb.Items.Add(dgvid);
             lb.Items.Add(dgvName);

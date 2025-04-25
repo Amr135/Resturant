@@ -138,6 +138,22 @@ namespace Resturant
                 }
             }
         }
+        public static bool Delete_Row(int id,string Table_Name,string Col_Name){
+            string qry = $"Delete From {Table_Name} Where {Col_Name}=@id";
+            SqlCommand Command = new SqlCommand(qry, DataBase.conn);
+            try
+            {DataBase.conn.Open();
+           
+                Command.Parameters.AddWithValue("@id", id);
+ 
+                Command.ExecuteNonQuery();
+
+
+            }
+            catch (Exception ex) { MessageBox.Show(ex.Message);return false; }
+            finally { DataBase.conn.Close(); }
+        return true;
+        }
         public static string user;
         public static string USER
         {

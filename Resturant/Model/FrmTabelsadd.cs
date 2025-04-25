@@ -13,12 +13,19 @@ namespace Resturant
 {
     public partial class FrmTabelsadd : SampleAdd
     {
-        public bool update = false;
+        private bool update = false;
         public string tablename;
-        public string id;
+        private string id;
         public FrmTabelsadd()
         {
             InitializeComponent();
+        
+        }
+        public FrmTabelsadd(bool Update,string id)
+        {
+            InitializeComponent();
+            this.update = Update;
+            this.id = id;
         }
 
         public override void btnSave_Click(object sender, EventArgs e)
@@ -26,13 +33,14 @@ namespace Resturant
             string query;
             if (!update)
             {
-               query = "insert into tables values('" + guna2TextBox1.Text + "')";
+               query = "insert into tables(TableName) values('" + guna2TextBox1.Text + "')";
             }
             else {
                  query = "Update tables set tablename='" + guna2TextBox1.Text + "'where tableid=" + id;
                 tablename = guna2TextBox1.Text;
             }
                 DataBase.UpdateData(query);
+            MessageBox.Show("Saved  Successfuly");
             guna2TextBox1.Text = "";
 
         }

@@ -21,9 +21,7 @@ namespace Resturant
         public void GetDataTables()
         {
             string query = "select * From Tables where tableName like '%" + txtSearch.Text + "%'";
-            //ListBox lb = new ListBox();
-            //lb.Items.Add(SR);
-            //lb.Items.Add(Tname);
+         
             DataBase.LoadData1(query, DataGridView1);
         }
 
@@ -56,17 +54,17 @@ namespace Resturant
             if (DataGridView1.Columns[e.ColumnIndex].Name.ToString() == "Update")
             {
                 string id = DataGridView1.Rows[e.RowIndex].Cells["SR"].Value.ToString();
-                FrmTabelsadd f = new FrmTabelsadd();
-                f.update = int.Parse(id) > 0 ? true : false;
-                f.id = id;
-                f.ShowDialog();
+                FrmTabelsadd f = new FrmTabelsadd(true,id);
+                Utility.BlurBackGround(f);
+             
+                
                 DataGridView1.Rows[e.RowIndex].Cells["Tname"].Value = f.tablename;
             }
             else
           if (DataGridView1.Columns[e.ColumnIndex].Name.ToString() == "Delete")
             {
                 string id = DataGridView1.Rows[e.RowIndex].Cells["SR"].Value.ToString();
-                string query = "delete from tabels where tabelid=" + id;
+                string query = "delete from Tables where tableid=" + id;
                 DataBase.UpdateData(query);
                 DataGridView1.Rows[e.RowIndex].Visible = false;
                 GetDataTables();

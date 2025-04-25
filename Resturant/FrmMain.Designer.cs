@@ -182,6 +182,7 @@
             btnKitchen.Text = "Kitchen";
             btnKitchen.TextAlign = HorizontalAlignment.Left;
             btnKitchen.TextOffset = new Point(20, 0);
+            btnKitchen.Click += btnKitchen_Click;
             // 
             // btnOrders
             // 
@@ -324,6 +325,7 @@
             btnProducts.Text = "Products";
             btnProducts.TextAlign = HorizontalAlignment.Left;
             btnProducts.TextOffset = new Point(20, 0);
+            btnProducts.Click += btnProducts_Click;
             // 
             // btnHome
             // 
@@ -381,7 +383,6 @@
             guna2Panel2.ShadowDecoration.CustomizableEdges = customizableEdges28;
             guna2Panel2.Size = new Size(968, 54);
             guna2Panel2.TabIndex = 2;
-     
             // 
             // label1
             // 

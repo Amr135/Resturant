@@ -178,9 +178,8 @@
             LbTable.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             LbTable.Location = new Point(1207, 23);
             LbTable.Name = "LbTable";
-            LbTable.Size = new Size(57, 28);
+            LbTable.Size = new Size(0, 28);
             LbTable.TabIndex = 3;
-            LbTable.Text = "Table";
             LbTable.Visible = false;
             // 
             // guna2ControlBox1
@@ -247,6 +246,7 @@
             BtnBillList.TabIndex = 1;
             BtnBillList.Text = "Bill List";
             BtnBillList.TextOffset = new Point(-10, 30);
+            BtnBillList.Click += BtnBillList_Click;
             // 
             // BtnDelevery
             // 

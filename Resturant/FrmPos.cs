@@ -30,9 +30,24 @@ namespace Resturant
         private void FillPanelCategory()
         {
             CategoryPanel.Controls.Clear();
-            string[] cate = { "Drink", "Meat", "Food", "Burger" };
+          List<string> cate = GET_Name_Category("select Category_Name from Category");
             int yOffset = 0;
-
+           List<string> GET_Name_Category(string qry)
+            { List<string> L_Category = new List<string>();
+                try
+                {
+                DataBase.conn.Open();
+                SqlDataReader Reader=new SqlCommand(qry ,DataBase.conn).ExecuteReader();
+                    while (Reader.Read())
+                    {
+                        L_Category.Add(Reader["Category_Name"].ToString());
+                    }
+              
+                }
+                catch (Exception ex) { MessageBox.Show(ex.Message); }
+                finally { DataBase.conn.Close(); }
+                return L_Category;
+            }
             foreach (string c in cate)
             {
                 Guna.UI2.WinForms.Guna2Button button = new Guna.UI2.WinForms.Guna2Button();
@@ -72,12 +87,9 @@ namespace Resturant
                         TxtTotal.Text = (Price += int.Parse(row.Cells["DgvAmont"].Value.ToString())).ToString();
                         q = false;
                     }
-
                 }
                 if (q) addtoDatagridview(W);
-
             };
-
             return U;
         }
         private void addtoDatagridview(USproducts us)
@@ -132,8 +144,10 @@ namespace Resturant
             LbTable.Text = "";
             LbWaiter.Text = "";
             DataGridView1.Rows.Clear();
+            TxtTotal.Text = "0";
             LbWaiter.Visible =
             LbTable.Visible = false;
+            OrderType = "";
 
         }
         private void BtnNew_Click(object sender, EventArgs e)
@@ -143,14 +157,14 @@ namespace Resturant
 
         private void BtnDelevery_Click(object sender, EventArgs e)
         {
-           // resete();
+            // resete();
             OrderType = "Delevery";
 
         }
 
         private void BtnTakeaway_Click(object sender, EventArgs e)
         {
-           // resete();
+            // resete();
             OrderType = "Take away";
         }
 
@@ -160,7 +174,7 @@ namespace Resturant
             FrmTablesState F = new FrmTablesState();
             F.ShowDialog();
             LbTable.Text = F.LbTableChoosen.Text;
-            LbTable.Visible = true;
+            if (LbTable.Text != string.Empty) LbTable.Visible = true;
         }
 
         private void BtnKot_Click(object sender, EventArgs e)
@@ -170,9 +184,14 @@ namespace Resturant
                 MessageBox.Show("No Item was Choosed Yet ,Pleas Choose on Item At least");
                 return;
             }
+            if (OrderType == "")
+            {
+                MessageBox.Show("Please, Choose the Type of Order");
+                return;
+            }
             if (SendOrderDetailstoDatabase())
             {
-                DataBase.UpdateData("Update Tables set Tstate=1 where  Tablename='" + LbTable.Text+"'");
+                if (LbTable.Text != "") DataBase.UpdateData("Update Tables set Tstate=1 where  Tablename='" + LbTable.Text + "'");
                 MessageBox.Show("success order");
                 resete();
             }
@@ -181,14 +200,14 @@ namespace Resturant
         }
         private bool SendOrderDetailstoDatabase()
         {
-            
+
             SqlCommand command;
             string query = "select  Itname from Items";
             Dictionary<string, int> Ht = new Dictionary<string, int>();
             command = new SqlCommand(query, DataBase.conn);
             try
             {
-                string comqueryone="", comquerytwo="";
+                string comqueryone = "", comquerytwo = "";
                 string comquery1 = "", comquery2 = "";
                 DataBase.conn.Open();
                 SqlDataReader reader = command.ExecuteReader();
@@ -197,36 +216,42 @@ namespace Resturant
                 reader.Close();
                 foreach (DataGridViewRow row in DataGridView1.Rows)
                 {
-                     Ht[row.Cells["DgvName"].Value.ToString().ToLower()] = int.Parse(row.Cells["DgvQut"].Value.ToString());
+                    Ht[row.Cells["DgvName"].Value.ToString().ToLower()] = int.Parse(row.Cells["DgvQut"].Value.ToString());
                 }
                 foreach (KeyValuePair<string, int> I in Ht)
                 {
-                    comqueryone += I.Key+",";
+                    comqueryone += I.Key + ",";
                     comquerytwo += "@" + I.Key + ",";
                 }
                 comquery1 = comqueryone.Substring(0, comqueryone.Length - 1);
                 comquery2 = comquerytwo.Substring(0, comquerytwo.Length - 1);
 
 
-                query = "insert into orderDetails  ("+comquery1+ ",Tnumber,orderType,price) Values(" + comquery2+ ",@Tnumber,@orderType,@Price)";
+                query = "insert into orderDetails  (" + comquery1 + ",Tnumber,orderType,price) Values(" + comquery2 + ",@Tnumber,@orderType,@Price)";
 
                 command = new SqlCommand(query, DataBase.conn);
                 foreach (KeyValuePair<string, int> I in Ht)
                 {
-                    command.Parameters.AddWithValue("@" + I.Key , I.Value);
+                    command.Parameters.AddWithValue("@" + I.Key, I.Value);
                 }
 
                 command.Parameters.AddWithValue("@Tnumber", LbTable.Text);
                 command.Parameters.AddWithValue("@orderType", OrderType);
                 command.Parameters.AddWithValue("@Price", Price);
-          
+
                 command.ExecuteNonQuery();
                 DataBase.conn.Close();
                 return true;
             }
             catch
             (Exception ex)
-            { MessageBox.Show(ex.Message); DataBase.conn.Close();return false; }
+            { MessageBox.Show(ex.Message); DataBase.conn.Close(); return false; }
+        }
+
+        private void BtnBillList_Click(object sender, EventArgs e)
+        {
+            Bill_List bill_List = new Bill_List();
+             Utility.BlurBackGround(bill_List);
         }
     }
 }

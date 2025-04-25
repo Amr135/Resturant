@@ -22,6 +22,7 @@ namespace Resturant
         public static FrmMain Instance { get { if (_obj == null) _obj = new FrmMain(); return _obj; } }
         private void guna2ControlBox2_Click(object sender, EventArgs e)
         {
+            DataBase.conn.Close();
             Application.Exit();
 
         }
@@ -52,12 +53,25 @@ namespace Resturant
             AddControls(f);
         }
 
-     
+
 
         private void btnOrders_Click(object sender, EventArgs e)
         {
-            FrmPos f= new FrmPos();
+            FrmPos f = new FrmPos();
             f.ShowDialog();
+        }
+
+        private void btnKitchen_Click(object sender, EventArgs e)
+        {
+            FrmKitchenView f = new FrmKitchenView();
+            AddControls(f);
+        }
+
+        private void btnProducts_Click(object sender, EventArgs e)
+        {
+            FrmProductsView f = new FrmProductsView();
+            AddControls(f);
+
         }
     }
 }
